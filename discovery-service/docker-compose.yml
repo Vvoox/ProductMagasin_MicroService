@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+
+#  configserver:
+#    image: configserver:1.0
+#    ports:
+#      - "8888:8888"
+#    depends_on:
+#      - eurekaserver
+#    restart: on-failure
+
+  eurekaserver:
+    image: micros/discovery
+    ports:
+      - "8761:8761"
+
+  gateway-service:
+    image: micros/gateway
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eurekaserver
+
+  product-service:
+    image: micros/product
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eurekaserver
+    restart: on-failure
+
+  customer-service:
+    image: micros/customer
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eurekaserver
+    restart: on-failure
+
+  billing-service:
+    image: micros/billing
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eurekaserver
+    restart: on-failure
