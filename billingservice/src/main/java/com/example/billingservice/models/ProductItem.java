@@ -26,6 +26,6 @@ public class ProductItem {
     private Product product;
 
     @ManyToOne
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Bill bill;
 }

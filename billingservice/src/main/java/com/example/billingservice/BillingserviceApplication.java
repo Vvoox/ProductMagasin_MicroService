@@ -52,11 +52,13 @@ public class BillingserviceApplication {
                     .build());
             List<ProductItem> productItemList = new ArrayList<>();
             productItemList.add(productItem);
-            billRepository.save(Bill.builder()
+            log.info(productItem.toString());
+            Bill bill = billRepository.save(Bill.builder()
                     .productItems(productItemList)
                     .date(LocalDate.now())
                     .customer(customer)
                     .build());
+            log.info(bill);
 
 
         };
