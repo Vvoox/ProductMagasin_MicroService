@@ -22,26 +22,26 @@ services:
     depends_on:
       - eurekaserver
 
-  product-service:
-    image: micros/product
-    ports:
-      - "8081:8081"
-    depends_on:
-      - eurekaserver
-    restart: on-failure
-
-  customer-service:
-    image: micros/customer
-    ports:
-      - "8082:8082"
-    depends_on:
-      - eurekaserver
-    restart: on-failure
-
-  billing-service:
-    image: micros/billing
-    ports:
-      - "8083:8083"
-    depends_on:
-      - eurekaserver
-    restart: on-failure
+#  product-service:
+#    image: micros/product-service
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - eurekaserver
+#    restart: on-failure
+#
+#  customer-service:
+#    image: micros/customer
+#    ports:
+#      - "8082:8082"
+#    depends_on:
+#      - eurekaserver
+#    restart: on-failure
+#
+#  billing-service:
+#    image: micros/billing
+#    ports:
+#      - "8083:8083"
+#    depends_on:
+#      - eurekaserver
+#    restart: on-failure

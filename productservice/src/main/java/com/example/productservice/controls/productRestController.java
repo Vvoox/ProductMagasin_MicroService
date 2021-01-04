@@ -1,7 +1,11 @@
 package com.example.productservice.controls;
 
+import com.example.productservice.models.MessageBody;
 import com.example.productservice.models.Product;
 import com.example.productservice.repositories.ProductRepository;
+import com.example.productservice.service.Producer;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
@@ -9,20 +13,34 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.jms.Message;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/products/api")
+@RequiredArgsConstructor
+@Log4j2
 public class productRestController {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     //API : Get all products
     @GetMapping("")
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @GetMapping("/messagezip")
+    public String helloMessage(){
+        log.info("Call hello Message");
+        return "hello";
+    }
+
+    @PostMapping("/message")
+    public void sendMessage(@RequestBody MessageBody message){
+        Producer producer = new Producer();
+        Producer.sendMessage(message.getMessage());
     }
 
     //API : Get one product by id and return exception for non-existence
